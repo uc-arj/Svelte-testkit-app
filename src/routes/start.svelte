@@ -1,21 +1,21 @@
 <script>
-    import Test from './test.svelte';
-    	let code = true;
+	import Test from './test.svelte';
+	let code = true;
 	function start() {
 		code = false;
 	}
 </script>
 
 {#if code == true}
-		<div class="butn">
-			<button on:click={start} class="start">Start Test</button>
-		</div>
-	{:else}
-		<Test />
+	<div class="butn">
+		<button on:click={start} class="start">Start Test</button>
+	</div>
+{:else}
+	<Test />
 {/if}
 
 <style>
-    .butn {
+	.butn {
 		display: flex;
 		justify-content: center;
 		align-items: center;

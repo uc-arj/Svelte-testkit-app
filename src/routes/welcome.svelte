@@ -17,7 +17,7 @@
 		margin: 0px;
 		height: 40px;
 	}
-	
+
 	h1 {
 		text-align: center;
 		text-indent: -120px;

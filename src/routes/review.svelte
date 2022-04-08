@@ -14,8 +14,6 @@
 
 	let current = 0;
 	let useroption = [];
-
-	console.log(start);
 </script>
 
 <main>

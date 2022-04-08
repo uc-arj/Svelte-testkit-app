@@ -92,11 +92,12 @@
 					{#each JSON.parse(i.content_text).answers as c, d}
 						<div class="option flex-box">
 							<div
-								class="answer_bullets {`${c.is_correct == 1?"true":""}`}"
+								class="answer_bullets {`${c.is_correct == 1 ? 'true' : ''}`}"
 								class:match={cor_ans[j] == userselect_ans[j] && userselect_ans[j] == d}
 								class:mismatch={cor_ans[j] != userselect_ans[j] && userselect_ans[j] == d}
-							>	{String.fromCharCode(65 + d)}
-							</div> 
+							>
+								{String.fromCharCode(65 + d)}
+							</div>
 						</div>
 					{/each}
 					<!-- writing UNATTEMPTED and ATTEMPTED -->
@@ -187,7 +188,8 @@
 		height: 22px;
 	}
 
-	.true,.match {
+	.true,
+	.match {
 		background: green;
 		color: black;
 	}
@@ -195,7 +197,7 @@
 		background-color: red;
 		color: black;
 	}
-	
+
 	.ResultCard {
 		justify-content: center;
 		flex-direction: row;

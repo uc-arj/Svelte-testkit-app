@@ -20,23 +20,20 @@
 	}
 	onMount(() => {
 		Countend = setInterval(() => {
-				if(M==0 &&S==0 && Count==0)
-				{
-					endtime=null
-				}
-				else{
-					Count-=1
-				}
+			if (M == 0 && S == 0 && Count == 0) {
+				endtime = null;
+			} else {
+				Count -= 1;
+			}
 		}, 1000);
 	});
 </script>
 
-{#if M === 0 && S === 0 && Count==0 }
+{#if M === 0 && S === 0 && Count == 0}
 	{timerout()}
 	<span><b>{'0' + M}:{'0' + S}</b></span>
-	
 {:else}
-	<span><b>{M < 10 ? '0' + M : M}:{S < 10 ? '0' + S : S}</b></span>	
+	<span><b>{M < 10 ? '0' + M : M}:{S < 10 ? '0' + S : S}</b></span>
 {/if}
 
 <style>
@@ -47,5 +44,4 @@
 		float: right;
 		font-family: 'Courier New', Courier, monospace;
 	}
-
 </style>

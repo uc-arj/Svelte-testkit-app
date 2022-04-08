@@ -8,32 +8,32 @@
 	const forward = createEventDispatcher();
 </script>
 
-			<main>
-				<div id="mySidebar" class="sidebar">
-					<button class:openbtn={SideOpen} id="openbtn" on:click={() => (SideOpen = !SideOpen)}
-						><img {src} alt="arrow" width="10px" height="10px" /> Sidebar</button
-					>
-					<div class="questlist">
-						{#if SideOpen == true}
-							<div>
-								<p>Attempted Question</p>
-								<p>{$count} out of 11</p>
-							</div>
-							{#each user as i, j}
-								<p class="question">
-									<li on:click={() => forward('message', j)}>{JSON.parse(i.content_text).question}</li>
-								</p>
-							{/each}<br />
-						{/if}
-					</div>
+<main>
+	<div id="mySidebar" class="sidebar">
+		<button class:openbtn={SideOpen} id="openbtn" on:click={() => (SideOpen = !SideOpen)}
+			><img {src} alt="arrow" width="10px" height="10px" /> Sidebar</button
+		>
+		<div class="questlist">
+			{#if SideOpen == true}
+				<div>
+					<p>Attempted Question</p>
+					<p>{$count} out of 11</p>
 				</div>
-			</main>
+				{#each user as i, j}
+					<p class="question">
+						<li on:click={() => forward('message', j)}>{JSON.parse(i.content_text).question}</li>
+					</p>
+				{/each}<br />
+			{/if}
+		</div>
+	</div>
+</main>
 
 <style>
-	main{
-		display:flex;
-		justify-content:end;
-		align-items:flex-end;
+	main {
+		display: flex;
+		justify-content: end;
+		align-items: flex-end;
 		float: left;
 	}
 	li {
