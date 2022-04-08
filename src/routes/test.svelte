@@ -42,8 +42,8 @@
 
 <main class="width">
 	{#if testend == true}
-	<div class="question">
-		{#each users as i, j (i)}
+		<div class="question">
+			{#each users as i, j (i)}
 				{#if current == j}
 					<h4>{JSON.parse(i.content_text).question}</h4>
 					<div class="answer">
@@ -58,10 +58,10 @@
 								/>
 								{@html c.answer}
 							</p>
-							{/each}
+						{/each}
 					</div>
-					{/if}
-					{/each}
+				{/if}
+			{/each}
 		</div>
 		<Sidebar user={users} SideOpen={SideBar} on:message={questionList} />
 
