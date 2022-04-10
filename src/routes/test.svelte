@@ -90,7 +90,8 @@
 		position: fixed;
 		left: 0;
 		bottom: 0;
-		height: 50px;
+		width:100vw;
+		height: 7vh;
 		background-color: rgba(222, 204, 208, 0.653);
 		border-top: 1px solid rgba(163, 159, 159, 0.671);
 		border-radius: 5px;
@@ -104,8 +105,8 @@
 		font-family: 'Segoe UI';
 		font-size: medium;
 		text-align: justify;
-		height: 100px;
-		width: 700px;
+		height: 10vh;
+		width: 65vw;
 		top: 0px;
 		margin-bottom: 20px;
 	}

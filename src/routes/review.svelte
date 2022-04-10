@@ -93,13 +93,13 @@
 		font-size: medium;
 		text-align: justify;
 		height: 100px;
-		width: 1000px;
+		width: 100vw;
 		top: 0px;
 		margin-bottom: 20px;
 	}
 	.explaination {
 		position: absolute;
-		width: 1000px;
+		width: 100vw;
 		margin-top: 20px;
 		font-size: 14px;
 	}
@@ -113,7 +113,6 @@
 		width: 100vw;
 		min-height: 500px;
 		display: flex;
-		/* justify-content: center; */
 		align-items: center;
 		flex-direction: column;
 	}

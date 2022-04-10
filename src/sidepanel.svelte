@@ -44,6 +44,7 @@
 	.sidebar {
 		z-index: 1;
 		margin-top: 50px;
+		width:17vw;
 		height: 100vh;
 		position: fixed;
 		padding: 20px 5px 5px 0px;
@@ -55,7 +56,7 @@
 
 	.question {
 		cursor: pointer;
-		width: 250px;
+		width: 230px;
 	}
 	.openbtn {
 		z-index: 1;
@@ -63,7 +64,7 @@
 		-webkit-transform: rotate(-90deg);
 		transform: rotate(-90deg);
 		cursor: pointer;
-		left: 226px;
+		left: 210px;
 	}
 	#openbtn {
 		z-index: 1;

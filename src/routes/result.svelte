@@ -112,8 +112,7 @@
 
 		<footer class="footer">
 			<button class="Review" on:click={() => (review = !review)}> REVIEW</button>
-
-			<button class="Review" on:click={() => (start = !start)}>RETAKE</button>
+			<button class="Review" on:click="{()=>(start=!start)}" >RETAKE</button>
 		</footer>
 	{:else if start == false}
 		<Start />
@@ -132,8 +131,8 @@
 	.Correct,
 	.Incorrect,
 	.Attempted {
-		width: 250px;
-		height: 100px;
+		width: 15vw;
+		height: 14vh;
 		border: 1px inset;
 		margin: 5px;
 		display: flex;
@@ -157,7 +156,9 @@
 	}
 	.attempt,
 	.unattempt {
-		width: 160px;
+		line-height: 32px;
+		margin-left:12px;
+		width: 3vw;
 		text-align: left;
 	}
 	.footer {
@@ -165,7 +166,7 @@
 		left: 0;
 		bottom: 0;
 		width: 100vw;
-		height: 50px;
+		height: 5vh;
 		background-color: rgba(222, 204, 208, 0.653);
 		border-top: 1px solid rgba(163, 159, 159, 0.671);
 		border-radius: 12px;
@@ -184,8 +185,8 @@
 		border: 1px solid #aea8a8;
 		font-size: 17px;
 		font-weight: 700;
-		width: 22px;
-		height: 22px;
+		width: 2vw;
+		height: 22px;;
 	}
 
 	.true,
@@ -224,12 +225,12 @@
 		height: 40px;
 		border: 1px solid black;
 	}
-	.Questionlist {
+	/* .Questionlist {
 		width: 440px;
-	}
+	} */
 	.squares {
-		height: 26px;
-		width: 26px;
+		height: 3vh;
+		width: 2vw;
 		line-height: 20px;
 		padding: 3px 3px;
 		text-align: center;
@@ -242,7 +243,7 @@
 	li {
 		font-size: 20px;
 		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-		width: 400px;
+		width: 30vw;
 		cursor: pointer;
 		white-space: nowrap;
 		list-style-type: none;
@@ -255,12 +256,13 @@
 		position: relative;
 		display: flex;
 		align-items: center;
+		
 		flex-direction: column;
 	}
 
 	.option {
 		margin-left: 30px;
-		width: 50px;
+		width: 4vw;;
 		flex-direction: row;
 	}
 </style>
