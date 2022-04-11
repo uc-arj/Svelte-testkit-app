@@ -93,13 +93,13 @@
 		font-size: medium;
 		text-align: justify;
 		height: 100px;
-		width: 100vw;
+		width: 50vw;
 		top: 0px;
 		margin-bottom: 20px;
 	}
 	.explaination {
 		position: absolute;
-		width: 100vw;
+		width: 65vw;
 		margin-top: 20px;
 		font-size: 14px;
 	}

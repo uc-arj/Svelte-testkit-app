@@ -166,7 +166,7 @@
 		left: 0;
 		bottom: 0;
 		width: 100vw;
-		height: 5vh;
+		height: 7vh;
 		background-color: rgba(222, 204, 208, 0.653);
 		border-top: 1px solid rgba(163, 159, 159, 0.671);
 		border-radius: 12px;
