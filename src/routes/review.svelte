@@ -13,7 +13,7 @@
 	});
 
 	let current = 0;
-	let useroption = [];
+	let useroption =1
 </script>
 
 <main>
@@ -26,16 +26,16 @@
 						{#each JSON.parse(i.content_text).answers as c, d (c)}
 							{#if c.is_correct == 1}
 								<label>
-									<input type="radio" bind:group={useroption[j]} value={c.answer} name="option" />
+									<input type="radio" bind:group={useroption}  value={c.is_correct} name="option" />
 									{@html c.answer}
 								</label>
 							{:else}
 								<p>
 									<input
 										type="radio"
-										bind:group={useroption[j]}
+										bind:group={useroption}
 										disabled
-										value={c.answer}
+										value={c.is_correct}
 										name="option"
 									/>
 									{@html c.answer}
@@ -73,7 +73,7 @@
 		left: 0;
 		bottom: 0;
 		width: 100vw;
-		height: 50px;
+		height: 7vh;
 		background-color: rgba(222, 204, 208, 0.653);
 		border-top: 1px solid rgba(163, 159, 159, 0.671);
 		border-radius: 5px;
@@ -93,7 +93,7 @@
 		font-size: medium;
 		text-align: justify;
 		height: 100px;
-		width: 50vw;
+		width: 65vw;
 		top: 0px;
 		margin-bottom: 20px;
 	}
@@ -104,11 +104,11 @@
 		font-size: 14px;
 	}
 	.answer {
-		height: 150px;
-		width: 700px;
+		height: 14vh;
+		width: 65vw;
 		margin-top: 70px;
 		text-align:justify;
-		margin-bottom: 110px;
+		margin-bottom: 100px;
 	}
 	main {
 		width: 100vw;

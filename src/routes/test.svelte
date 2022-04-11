@@ -1,7 +1,7 @@
 <script>
 	// @ts-nocheck
 
-	import { afterUpdate, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import Counter from '../timer.svelte';
 	import Sidebar from '../sidepanel.svelte';
 	import Result from './result.svelte';
@@ -30,7 +30,7 @@
 			count.update((n) => n + 1);
 		}
 	}
-	function endtest() {
+	function endtest() {``
 		if (confirm('Do you want to end test')) {
 			testend = false;
 		}
@@ -42,7 +42,7 @@
 
 <main class="width">
 	{#if testend == true}
-		<div class="question">
+		<div class="question" class:top={(SideBar==true)}>
 			{#each users as i, j (i)}
 				{#if current == j}
 					<h4>{JSON.parse(i.content_text).question}</h4>
@@ -108,8 +108,11 @@
 		height: 60vh;
 		width: 65vw;
 		top: 0px;
-		margin-left:4vw;
+		/* margin-left:4vw; */
 		margin-bottom: 20px;
+	}
+	.top{
+		margin-left:4vw;
 	}
 	input[type='radio'],
 	p {

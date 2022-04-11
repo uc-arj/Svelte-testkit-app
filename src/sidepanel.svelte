@@ -10,12 +10,12 @@
 
 <main>
 	<div id="mySidebar" class="sidebar">
-		<button class:openbtn={SideOpen} id="openbtn" on:click={() => (SideOpen = !SideOpen)}
+		<button class:openbtn={(SideOpen==true)} id="openbtn" on:click={() => (SideOpen = !SideOpen)}
 			><img {src} alt="arrow" width="10px" height="10px" /> Sidebar</button
 		>
 		<div class="questlist">
 			{#if SideOpen == true}
-				<div>
+				<div class="questionattempt">
 					<p>Attempted Question</p>
 					<p>{$count} out of 11</p>
 				</div>
@@ -41,6 +41,9 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
+	.questionattempt{
+		width:13vw;
+	}
 	.sidebar {
 		z-index: 1;
 		margin-top: 50px;
@@ -56,7 +59,7 @@
 
 	.question {
 		cursor: pointer;
-		width: 230px;
+		width: 13vw;
 	}
 	.openbtn {
 		z-index: 1;
@@ -64,7 +67,7 @@
 		-webkit-transform: rotate(-90deg);
 		transform: rotate(-90deg);
 		cursor: pointer;
-		left: 210px;
+		left: 13vw;
 	}
 	#openbtn {
 		z-index: 1;
