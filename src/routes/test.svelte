@@ -105,9 +105,10 @@
 		font-family: 'Segoe UI';
 		font-size: medium;
 		text-align: justify;
-		height: 10vh;
+		height: 60vh;
 		width: 65vw;
 		top: 0px;
+		margin-left:4vw;
 		margin-bottom: 20px;
 	}
 	input[type='radio'],
@@ -139,6 +140,11 @@
 		margin-left: 3px;
 		margin-right: 10px;
 		border-radius: 12px 12px 0px 0px;
+	}
+	.option:hover {
+		width: 82px;
+		height: 40px;
+		border: 1px solid black;
 	}
 	.rightshift {
 		float: right;

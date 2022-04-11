@@ -1,4 +1,4 @@
-/*
+<!-- 
 File Name      : Index.svelte
 Description    : Testkit using Svelte.
 Author         : Arpan Jain
@@ -7,10 +7,9 @@ Created Date   : 24/03/2022
 Updated By     : Arpan Jain
 Updated Date   : 11/04/2022
 Last Update    : 11/04.2022
- */
+  -->
 
 <script>
-	// import Start from "../start.svelte"
 	import Wel from '../routes/welcome.svelte';
 	import Test from '../routes/test.svelte';
 	let code = true;

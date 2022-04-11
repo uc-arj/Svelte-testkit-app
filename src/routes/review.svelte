@@ -107,6 +107,7 @@
 		height: 150px;
 		width: 700px;
 		margin-top: 70px;
+		text-align:justify;
 		margin-bottom: 110px;
 	}
 	main {
