@@ -175,7 +175,7 @@
 	}
 
 	.answer_bullets {
-		line-height: 24px;
+		line-height: 16px;
 		padding: 3px 3px;
 		margin: 3px 2px 3px 8px;
 		text-align: center;
@@ -186,7 +186,7 @@
 		font-size: 17px;
 		font-weight: 700;
 		width: 2vw;
-		height: 22px;;
+		height: 3vh;
 	}
 
 	.true,
@@ -229,7 +229,7 @@
 		width: 440px;
 	} */
 	.squares {
-		height: 3vh;
+		height: 4vh;
 		width: 2vw;
 		line-height: 20px;
 		padding: 3px 3px;

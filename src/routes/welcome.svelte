@@ -8,10 +8,11 @@
 </main>
 
 <style>
+	
 	main {
 		background-color: white;
 		width: 100vw;
-		min-height: 40px;
+		min-height: 15vh;
 	}
 	img {
 		float: left;

@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="description" content="" />
-		<link rel="icon" href="%svelte.assets%/favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		%svelte.head%
-	</head>
-	<body>
-		<div>%svelte.body%</div>
-	</body>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="description" content="" />
+	<link rel="icon" href="%svelte.assets%/favicon.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	%svelte.head%
+	<style>
+		*{
+			box-sizing: border-box !important;
+		}
+		body{
+			margin: 0 !important;
+			padding: 0 !important;
+			/* overflow: hidden !important; */
+		}
+	</style>
+</head>
+<body>
+	%svelte.body%
+	
+</body>
+<style>
+		.body{
+			width:100vw;
+		}
+</style>
+
 </html>
