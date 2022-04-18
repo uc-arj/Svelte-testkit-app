@@ -7,31 +7,28 @@ Created Date   : 24/03/2022
 Updated By     : Arpan Jain
 Updated Date   : 11/04/2022
 Last Update    : 11/04.2022
-  -->
-
+-->
 <script>
-	import Wel from '../routes/welcome.svelte';
-	import Test from '../routes/test.svelte';
+	import Welcomepage from '../routes/welcome.svelte';
+	import Testpage from '../routes/test.svelte';
 	let code = true;
 	function start() {
 		code = false;
 	}
 </script>
 
-<Wel />
+<Welcomepage />
 <main>
 	{#if code == true}
 		<div class="butn">
 			<button on:click={start} class="start">Start Test</button>
 		</div>
 	{:else}
-		<Test />
+		<Testpage />
 	{/if}
 </main>
 
-<!-- <Wel/> -->
 <style>
-		
 	main {
 		width: 100vw;
 		min-height: 500px;

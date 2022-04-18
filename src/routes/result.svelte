@@ -1,98 +1,123 @@
+<!-- 
+File Name      : resultdata.svelte
+Description    : Testkit using Svelte.
+Author         : Arpan Jain
+version        : 1.0
+Created Date   : 24/03/2022
+Updated By     : Arpan Jain
+Updated Date   : 11/04/2022
+Last Update    : 12/04.2022
+  -->
 <script>
-	import Review from './review.svelte';
-	import Start from './start.svelte';
-	import { option } from '../store';
+	import Reviewpage from './review.svelte';
+	import Startpage from './start.svelte';
+	import { option, count } from '../store';
+
 	import { onMount } from 'svelte';
 
-	export let count;
-	export let result;
-	let review;
-	let start;
+	export let resultdata;
+	let review_page;
+	let start_page;
 	onMount(() => {
-		review = true;
-		start = true;
+		review_page = true;
+		start_page = true;
 	});
 	let total = 11;
-	let attemptCount = count;
-	let skipped = total - count;
-	let correct = [];
-	let answerid = [];
-	let correctcount = 0;
-	let incorrectcount = 0;
+	let attempt_count = $count;
+	let skipped = total - attempt_count;
+	let correct_ans = [];
+	let answer_id = [];
+	let correct_count = 0;
+	let incorrect_count = 0;
 	let userselect_ans = [];
 	let cor_ans = [];
+	let score;
+	let review_q;
 
-	for (let i = 0; i < result.length; i++) {
+	for (let i = 0; i < resultdata.length; i++) {
 		let answer_index = 0;
 		let actual_index = 0;
-		if ($option[i])
-			for (let j = 0; j < 4; j++) {
-				if (JSON.parse(result[i].content_text).answers[j].answer == $option[i]) {
-					answer_index = j;
+			if ($option[i]) {
+				for (let j = 0; j < 4; j++) {
+					if (JSON.parse(resultdata[i].content_text).answers[j].answer == $option[i]) {
+						answer_index = j;
+					} // end of if
+				} // end of for
+			} else {
+				answer_index = null; //end of j loop
+			}
+			for (let k = 0; k < 4; k++) {
+				if (JSON.parse(resultdata[i].content_text).answers[k].is_correct == 1) {
+					correct_ans = [...correct_ans,JSON.parse(resultdata[i].content_text).answers[k].is_correct];
+					actual_index = k;
+					answer_id = [...answer_id, JSON.parse(resultdata[i].content_text).answers[k].id];
 				}
-			}
-		else {
-			answer_index = null;
-		} //end of j loop
-		for (let k = 0; k < 4; k++) {
-			if (JSON.parse(result[i].content_text).answers[k].is_correct == 1) {
-				correct = [...correct, JSON.parse(result[i].content_text).answers[k].is_correct];
-				actual_index = k;
-				answerid = [...answerid, JSON.parse(result[i].content_text).answers[k].id];
-			}
-		}
+			} // end of k loop
 
-		userselect_ans[i] = answer_index;
-		cor_ans[i] = actual_index;
+			userselect_ans[i] = answer_index; // user answer index
+			cor_ans[i] = actual_index; // actual answwer index
 	} //end of i loop
 
-	for (let i = 0; i < result.length; i++) {
-		if (userselect_ans[i] == cor_ans[i]) {
-			correctcount++;
-		} else if (userselect_ans[i] != null) {
-			incorrectcount++;
-		}
+		for (let i = 0; i < resultdata.length; i++) {
+			if (userselect_ans[i] == cor_ans[i]) {
+				correct_count++;
+			} else if (userselect_ans[i] != null) {
+				incorrect_count++;
+			}
+		} // end of for loop
+
+	function restart() {
+		start_page = !start_page;
+		count.set(0);
+	} // end of restart function
+	function review(j) {
+		review_page=!review_page
+		review_q=j
+		console.log(j)
 	}
-	let score = Math.round((correctcount / total) * 100);
+
+	// correct incorrect count
+	score = Math.round((correct_count / total) * 100);
 </script>
 
 <main>
-	{#if review == true && start == true}
-		<div class="ResultCard flex-box">
-			<div class="Score">
+	{#if review_page == true && start_page == true}
+		<div class="result_card flex-box">
+			<div class="score-div flex">
 				<h3>Score</h3>
 				<p>{score}%</p>
 			</div>
-			<div class="Skip">
+			<div class="skip-div flex">
 				<h3>Skipped Question</h3>
 				<p>{skipped}</p>
 			</div>
-			<div class="Correct">
+			<div class="correct-div flex">
 				<h3>Correct Question</h3>
-				<p class="correct">{correctcount}</p>
+				<p class="correct-count">{correct_count}</p>
 			</div>
-			<div class="Incorrect">
+			<div class="incorrect-div flex">
 				<h3>Incorrect Question</h3>
-				<p class="incorrect">{incorrectcount}</p>
+				<p class="incorrect-count">{incorrect_count}</p>
 			</div>
 
-			<div class="Attempted">
+			<div class="attempted-div flex">
 				<h3>Attempted Question</h3>
-				<p>{attemptCount}</p>
+				<p>{attempt_count}</p>
 			</div>
 		</div>
 
-		<div class="block">
-			{#each result as i, j}
-				<div class="flex-box">
-					<div class="squares">{j + 1}</div>
-					<div class="Questionlist">
-						<li class="Question">{JSON.parse(i.content_text).question}</li>
+		<div class="block flex-box">
+			{#each resultdata as i, j}
+				<div class="flex-box mb1">
+					<div class="squares flex">{j + 1}</div>
+					<div class="question-list">
+						<!-- <a href={`reviews/${j+1}`}> -->
+						<li class="question" on:click="{()=>review(j)}">{JSON.parse(i.content_text).question}</li>
 					</div>
 					{#each JSON.parse(i.content_text).answers as c, d}
 						<div class="option flex-box">
 							<div
-								class="answer_bullets {`${c.is_correct == 1 ? 'true' : ''}`}"
+								class="answer-bullets flex {`${c.is_correct == 1 ? 'true' : ''}`}"
 								class:match={cor_ans[j] == userselect_ans[j] && userselect_ans[j] == d}
 								class:mismatch={cor_ans[j] != userselect_ans[j] && userselect_ans[j] == d}
 							>
@@ -100,7 +125,7 @@
 							</div>
 						</div>
 					{/each}
-					<!-- writing UNATTEMPTED and ATTEMPTED -->
+					<!-- writing UNaTTEMPTED and ATTEMPTED -->
 					{#if userselect_ans[j] == null}
 						<div class="unattempt">UNATTEMPTED</div>
 					{:else}
@@ -109,15 +134,13 @@
 				</div>
 			{/each}
 		</div>
-
 		<footer class="footer">
-			<button class="Review" on:click={() => (review = !review)}> REVIEW</button>
-			<button class="Review" on:click="{()=>(start=!start)}" >RETAKE</button>
+			<button class="foot_option" on:click={restart}>RETAKE</button>
 		</footer>
-	{:else if start == false}
-		<Start />
-	{:else if review == false}
-		<Review />
+	{:else if start_page == false}
+		<Startpage />
+	{:else if review_page == false}
+		<Reviewpage reviewq={review_q}/>
 	{/if}
 </main>
 
@@ -126,39 +149,36 @@
 		width: 100vw;
 		min-height: 500px;
 	}
-	.Score,
-	.Skip,
-	.Correct,
-	.Incorrect,
-	.Attempted {
+	.score-div,
+	.skip-div,
+	.correct-div,
+	.incorrect-div,
+	.attempted-div {
 		width: 15vw;
 		height: 14vh;
 		border: 1px inset;
 		margin: 5px;
-		display: flex;
 		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-		justify-content: center;
-		align-items: center;
 		flex-direction: column;
 	}
+	h3,
 	p {
-		font-size: 20px;
+		font-size: 3vh;
+		margin: 0px;
+		margin-bottom: 5px;
+	}
+	p {
 		margin: 0px;
 		color: rgba(20, 62, 216, 0.703);
 	}
-	.correct,
-	.attempt {
-		color: rgb(49, 207, 49);
-	}
-	.incorrect,
-	.unattempt {
-		color: #ea4335;
-	}
+
 	.attempt,
 	.unattempt {
-		line-height: 32px;
-		margin-left:12px;
-		width: 3vw;
+		line-height: 4vh;
+		width: 5vw;
+		height: 2vh;
+		font-weight: bold;
+		font-size: 2vh;
 		text-align: left;
 	}
 	.footer {
@@ -166,82 +186,92 @@
 		left: 0;
 		bottom: 0;
 		width: 100vw;
-		height: 7vh;
+		height: auto;
+		margin-top: 2vh;
 		background-color: rgba(222, 204, 208, 0.653);
 		border-top: 1px solid rgba(163, 159, 159, 0.671);
 		border-radius: 12px;
-		margin: auto;
 		padding-right: 20px;
 	}
-
-	.answer_bullets {
-		line-height: 16px;
-		padding: 3px 3px;
-		margin: 3px 2px 3px 8px;
+	.flex{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.answer-bullets {
 		text-align: center;
-		border-radius: 40px;
+		border-radius: 3vw;
 		color: #aea8a8;
 		background: #fff;
 		border: 1px solid #aea8a8;
-		font-size: 17px;
+		font-size: 3vh;
 		font-weight: 700;
-		width: 2vw;
-		height: 3vh;
+		width: 3vw;
+		height: 5vh;
 	}
-
-	.true,
+	.true {
+		background-color: blue;
+		color: white;
+	}
 	.match {
 		background: green;
-		color: black;
+		color: white;
 	}
 	.mismatch {
 		background-color: red;
 		color: black;
 	}
+	.correct-count,
+	.attempt {
+		color: rgb(49, 207, 49);
+	}
+	.incorrect-count,
+	.unattempt {
+		color: #ea4335;
+	}
 
-	.ResultCard {
+	.result_card {
 		justify-content: center;
 		flex-direction: row;
-		height: 150px;
+		height: 17vh;
 	}
 
 	.flex-box {
 		display: flex;
 	}
+	.mb1 {
+		margin-bottom: 1vh;
+	}
 
-	.Review {
+	.foot_option {
 		background-color: #ea4335;
 		color: white;
-		width: 80px;
-		height: 40px;
-		margin-top: 5px;
-		margin-left: 3px;
+		width: 5vw;
+		height: 6vh;
+		font-size: 1vw;
+		padding: 0px;
+		margin-top: 1vh;
+		margin-left: 1vw;
 		margin-right: 15px;
 		border-radius: 12px 12px 0px 0px;
 		float: right;
 	}
-	.Review:hover {
-		width: 82px;
-		height: 40px;
-		border: 1px solid black;
+	.foot_option:hover {
+		border: 3px solid black;
 	}
-	/* .Questionlist {
-		width: 440px;
-	} */
+
 	.squares {
-		height: 4vh;
+		height: 5vh;
 		width: 2vw;
-		line-height: 20px;
-		padding: 3px 3px;
 		text-align: center;
 		border-radius: 20px;
 		color: #eee;
-		margin-right: 20px;
+		margin-right: 1vw;
 		background: #616970;
 		font-size: 16px;
 	}
 	li {
-		font-size: 20px;
+		font-size: 3vh;
 		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 		width: 30vw;
 		cursor: pointer;
@@ -254,15 +284,14 @@
 
 	.block {
 		position: relative;
-		display: flex;
 		align-items: center;
-		
+
 		flex-direction: column;
 	}
 
 	.option {
 		margin-left: 30px;
-		width: 4vw;;
+		width: 4vw;
 		flex-direction: row;
 	}
 </style>

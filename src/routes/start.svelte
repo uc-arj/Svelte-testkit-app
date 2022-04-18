@@ -1,5 +1,16 @@
+<!-- 
+File Name      : Start.svelte
+Description    : Testkit using Svelte.
+Author         : Arpan Jain
+version        : 1.0
+Created Date   : 24/03/2022
+Updated By     : Arpan Jain
+Updated Date   : 11/04/2022
+Last Update    : 12/04.2022
+  -->
+
 <script>
-	import Test from './test.svelte';
+	import Testpage from './test.svelte';
 	let code = true;
 	function start() {
 		code = false;
@@ -11,7 +22,7 @@
 		<button on:click={start} class="start">Start Test</button>
 	</div>
 {:else}
-	<Test />
+	<Testpage />
 {/if}
 
 <style>

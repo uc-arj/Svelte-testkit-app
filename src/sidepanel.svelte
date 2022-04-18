@@ -1,6 +1,17 @@
+<!-- 
+File Name      : Sidepanel.svelte
+Description    : Testkit using Svelte.
+Author         : Arpan Jain
+version        : 1.0
+Created Date   : 24/03/2022
+Updated By     : Arpan Jain
+Updated Date   : 11/04/2022
+Last Update    : 12/04.2022
+-->
+
 <script>
 	export let user;
-	export let SideOpen = false;
+	export let side_open = false;
 	import { count } from './store';
 	import { createEventDispatcher } from 'svelte';
 
@@ -10,14 +21,13 @@
 
 <main>
 	<div id="mySidebar" class="sidebar">
-		<button class:openbtn={(SideOpen==true)} id="openbtn" on:click={() => (SideOpen = !SideOpen)}
-			><img {src} alt="arrow" width="10px" height="10px" /> Sidebar</button
-		>
+		<button class:openbtn={(side_open==true)} id="openbtn" on:click={() => (side_open = !side_open)}
+			><img {src} alt="arrow" width="10px" height="10px" /> Sidebar</button>
 		<div class="questlist">
-			{#if SideOpen == true}
-				<div class="questionattempt">
-					<p>Attempted Question</p>
-					<p>{$count} out of 11</p>
+			{#if side_open == true}
+				<div class="question-attempt">
+					<p class="count-block">Attempted Question</p>
+					<p class="count-block">{$count} out of 11</p>
 				</div>
 				{#each user as i, j}
 					<p class="question">
@@ -41,14 +51,22 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-	.questionattempt{
+	.question-attempt{
 		width:13vw;
 	}
+	.count-block{
+		border:2px inset red;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		font-size:3vh;
+		text-align: center;
+	}
+	
 	.sidebar {
 		z-index: 1;
 		margin-top: 50px;
 		width:17vw;
-		height: 100vh;
+		height: 70vh;
 		position: fixed;
 		padding: 20px 5px 5px 0px;
 		top: 30px;
@@ -60,6 +78,9 @@
 	.question {
 		cursor: pointer;
 		width: 13vw;
+		font-weight:bold;
+		border:dashed red;
+		border-width:3px 3px 3px 0px;
 	}
 	.openbtn {
 		z-index: 1;

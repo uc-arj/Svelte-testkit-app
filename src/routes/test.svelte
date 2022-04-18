@@ -1,101 +1,187 @@
+<!-- 
+File Name      : test.svelte
+Description    : Testkit using Svelte.
+Author         : Arpan Jain
+version        : 1.0
+Created Date   : 24/03/2022
+Updated By     : Arpan Jain
+Updated Date   : 11/04/2022
+Last Update    : 12/04.2022
+-->
 <script>
 	// @ts-nocheck
 
 	import { onMount } from 'svelte';
 	import Counter from '../timer.svelte';
 	import Sidebar from '../sidepanel.svelte';
-	import Result from './result.svelte';
+	import Resultpage from './result.svelte';
 	import { count } from '../store';
 	import { option } from '../store';
 
-	export let users = [];
-	let SideBar = false;
-	let testend = true;
-	let useroption = [];
+	export let user_data = [];
+	let sidebar = false;
+	let test_end = true;
+	let show_end = false;
+	let timeend = false;
+	let user_option = [];
 
 	onMount(async function () {
-		$option = useroption;
-		let response = await fetch('./static/data/question.json');
-		users = await response.json();
+		$option = user_option;
+		let response = await fetch('../src/data/question.json');
+		user_data = await response.json();
 	});
 
 	let current = 0;
-	function timerout(event) {
+	function timerOut(event) {
 		if (event.value == null) {
-			testend = null;
+			timeend = true;
 		}
 	}
 	function attemptCount(j) {
-		if (useroption[j] == null) {
+		if (user_option[j] == null) {
 			count.update((n) => n + 1);
 		}
 	}
-	function endtest() {``
-		if (confirm('Do you want to end test')) {
-			testend = false;
-		}
+	function endTest() {
+		show_end = true;
 	}
 	function questionList(e) {
 		current = e.detail;
 	}
 </script>
 
-<main class="width">
-	{#if testend == true}
-		<div class="question" class:top={(SideBar==true)}>
-			{#each users as i, j (i)}
+<main class="width flex">
+	{#if test_end == true}
+		<div class="question" class:top={sidebar == true}>
+			{#each user_data as i, j (i)}
 				{#if current == j}
 					<h4>{JSON.parse(i.content_text).question}</h4>
 					<div class="answer">
 						{#each JSON.parse(i.content_text).answers as c, d (c)}
-							<p>
+							<label class="flex">
 								<input
+									class="flex"
 									type="radio"
-									bind:group={useroption[j]}
+									bind:group={user_option[j]}
 									on:click={attemptCount(j)}
 									value={c.answer}
 									name="option"
 								/>
 								{@html c.answer}
-							</p>
+							</label>
 						{/each}
 					</div>
 				{/if}
 			{/each}
 		</div>
-		<Sidebar user={users} SideOpen={SideBar} on:message={questionList} />
+		<Sidebar user={user_data} side_open={sidebar} on:message={questionList} />
 
-		<footer id="footer" class="width">
-			<button class="option rightshift" on:click={endtest}>End Test</button>
-			<button class="option rightshift" on:click={() => current++} disabled={current == 10}>
-				Next
-			</button>
-			<p class="list rightshift"><b>{current + 1} out of 11</b></p>
-			<button class="option rightshift" on:click={() => current--} disabled={current == 0}>
+		<div style="--show:{show_end || timeend ? 'block' : 'none'}" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content">
+				{#if show_end == true}
+					<span class="close" on:click={() => (show_end = !show_end)}>&times;</span>
+					<p>Do you Want to End Test</p>
+
+					<button class="cancel_btn" on:click={() => (show_end = !show_end)}> Cancel</button>
+					<button class="Ok_btn" on:click={() => (test_end = false)}>OK</button>
+				{:else}
+					<p class="time-endcode">Timeup your test is end :Check out your Result</p>
+					<button class="Ok_btn" on:click={() => (test_end = false)}>OK</button>
+				{/if}
+			</div>
+		</div>
+
+		<footer id="footer" class="width flex">
+			<Counter on:call={timerOut} />
+			<button class="option right_shift" on:click={() => (sidebar = !sidebar)}>List</button>
+			<button class="option right_shift" on:click={() => current--} disabled={current == 0}>
 				Previous
 			</button>
-			<button class="option rightshift" on:click={() => (SideBar = !SideBar)}>List</button>
-			<Counter on:call={timerout} />
+			<p class="list right_shift"><b>{current + 1} out of 11</b></p>
+			<button class="option right_shift" on:click={() => current++} disabled={current == 10}>
+				Next
+			</button>
+			<button class="option right_shift" on:click={endTest}>End Test</button>
 		</footer>
 	{:else}
-		<Result result={users} count={$count} />
+		<Resultpage resultdata={user_data} />
 	{/if}
 </main>
 
 <style>
+	.modal {
+		display: var(--show); /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 1; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0, 0, 0); /* Fallback color */
+		background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	}
+	.modal-content {
+		background-color: #fefefe;
+		margin: 2% auto; /* 15% from the top and centered */
+		padding: 20px;
+		font-size: 2vw;
+		font-weight: bold;
+		text-align: center;
+		border: 1px solid #888;
+		border-radius: 25px;
+		width: 25vw; /* Could be more or less, depending on screen size */
+	}
+
+	/* The Close Button */
+	.close {
+		color: #aaa;
+		float: right;
+		font-size: 28px;
+		font-weight: bold;
+	}
+
+	.close:hover,
+	.close:focus {
+		color: black;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	.cancel_btn,
+	.Ok_btn {
+		background-color: gray;
+		width: 100px;
+		height: 30px;
+		font-size: 20px;
+		border: 1px solid gray;
+		border-radius: 10px;
+	}
+	.Ok_btn {
+		background-color: rgb(0, 123, 255);
+	}
+	.time-endcode {
+		font-size: 14px;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
 	.width {
 		width: 100vw;
 	}
 	#footer {
 		position: fixed;
-		left: 0;
-		bottom: 0;
-		width:100vw;
-		height: 7vh;
+		left: 0vw;
+		bottom: 0vh;
+		width: 100vw;
+		height: 10vh;
 		background-color: rgba(222, 204, 208, 0.653);
 		border-top: 1px solid rgba(163, 159, 159, 0.671);
 		border-radius: 5px;
-		padding-right: 20px;
+		justify-content: flex-end;
+		flex-wrap: wrap;
+		padding-right: 2vw;
 	}
 	.list {
 		margin: 15px 5px 10px 5px;
@@ -108,27 +194,32 @@
 		height: 60vh;
 		width: 65vw;
 		top: 0px;
-		/* margin-left:4vw; */
-		margin-bottom: 20px;
+		margin-bottom: 5vh;
+		overflow: auto;
 	}
-	.top{
-		margin-left:4vw;
+	.top {
+		margin-left: 5vw;
+	}
+	.flex {
+		display: flex;
 	}
 	input[type='radio'],
-	p {
+	label {
 		cursor: pointer;
+		padding: 4px;
+		font-size: 1rem;
 	}
 
 	.answer {
 		z-index: 1;
-		height: 150px;
-		width: 700px;
-		margin-top: 100px;
-		margin-bottom: 50px;
+		height: 24vh;
+		width: 65vw;
+		margin-top: 20vh;
+		margin-bottom: 10vh;
+		overflow: auto;
 	}
 	main {
 		min-height: 500px;
-		display: flex;
 		align-items: center;
 		flex-direction: column;
 	}
@@ -145,12 +236,7 @@
 		border-radius: 12px 12px 0px 0px;
 	}
 	.option:hover {
-		width: 82px;
-		height: 40px;
-		border: 1px solid black;
-	}
-	.rightshift {
-		float: right;
+		border: 3px solid black;
 	}
 	button:disabled {
 		background-color: lightgrey;

@@ -1,39 +1,54 @@
+<!-- 
+File Name      : review.svelte
+Description    : Testkit using Svelte.
+Author         : Arpan Jain
+version        : 1.0
+Created Date   : 24/03/2022
+Updated By     : Arpan Jain
+Updated Date   : 11/04/2022
+Last Update    : 12/04.2022
+-->
+
 <script>
 	import { onMount } from 'svelte';
 	import Result from './result.svelte';
 	import { count } from '../store';
-	import Start from './start.svelte';
-	export let users = [];
+	import Startpage from './start.svelte';
+	
+	export let user_data = [];
+	export let reviewq;
 	let result = true;
-	let start = true;
+	let start_page = true;
 
 	onMount(async function () {
-		let response = await fetch('./static/data/question.json');
-		users = await response.json();
+		let response = await fetch('../src/data/question.json');
+		user_data = await response.json();
 	});
+	function restart() {
+		start_page=!start_page
+		count.set(0)
+	}
 
-	let current = 0;
-	let useroption =1
+	let current = reviewq;
 </script>
 
 <main>
-	{#if result == true && start == true}
+	{#if result == true && start_page == true}
 		<div class="question">
-			{#each users as i, j (i)}
+			{#each user_data as i, j (i)}
 				{#if current == j}
 					<h4>{JSON.parse(i.content_text).question}</h4>
 					<div class="answer">
 						{#each JSON.parse(i.content_text).answers as c, d (c)}
 							{#if c.is_correct == 1}
 								<label>
-									<input type="radio" bind:group={useroption}  value={c.is_correct} name="option" />
+									<input type="radio" checked class="custom" value={c.is_correct} name="option" />
 									{@html c.answer}
 								</label>
 							{:else}
 								<p>
 									<input
 										type="radio"
-										bind:group={useroption}
 										disabled
 										value={c.is_correct}
 										name="option"
@@ -51,16 +66,16 @@
 		</div>
 
 		<footer id="footer">
-			<button class="option" on:click={() => (start = !start)}>Restart</button>
-			<button class="option" on:click={() => current++} disabled={current == 10}> Next </button>
+			<button class="panel" on:click={restart}>Restart</button>
+			<button class="panel" on:click={() => current++} disabled={current == 10}> Next </button>
 			<p class="list"><b>{current + 1} out of 11</b></p>
-			<button class="option" on:click={() => current--} disabled={current == 0}> Previous </button>
-			<button class="option" on:click={() => (result = !result)}>Result</button>
+			<button class="panel" on:click={() => current--} disabled={current == 0}> Previous </button>
+			<button class="panel" on:click={() => (result = !result)}>Result</button>
 		</footer>
-	{:else if start == false}
-		<Start />
+	{:else if start_page == false}
+		<Startpage />
 	{:else if result == false}
-		<Result result={users} count={$count} />
+		<Result resultdata={user_data} />
 	{/if}
 </main>
 
@@ -92,23 +107,23 @@
 		font-family: 'Segoe UI';
 		font-size: medium;
 		text-align: justify;
-		height: 100px;
+		height: 25vw;
 		width: 65vw;
 		top: 0px;
-		margin-bottom: 20px;
+		margin-bottom: 4vh;
 	}
 	.explaination {
 		position: absolute;
 		width: 65vw;
-		margin-top: 20px;
-		font-size: 14px;
+		margin-top: 4vh;
+		font-size: 15px;
 	}
 	.answer {
 		height: 14vh;
 		width: 65vw;
-		margin-top: 70px;
+		margin-top: 7vh;
 		text-align:justify;
-		margin-bottom: 100px;
+		margin-bottom: 14vh;
 	}
 	main {
 		width: 100vw;
@@ -117,7 +132,7 @@
 		align-items: center;
 		flex-direction: column;
 	}
-	.option {
+	.panel {
 		background-color: #ea4335;
 		color: white;
 		width: 80px;
@@ -128,13 +143,12 @@
 		border-radius: 12px 12px 0px 0px;
 		float: right;
 	}
-	.option:hover {
-		width: 82px;
-		height: 40px;
-		border: 1px solid black;
+	.panel:hover {
+		border: 3px solid black;
 	}
 	button:disabled {
 		background-color: lightgrey;
 		cursor: not-allowed;
 	}
+
 </style>
