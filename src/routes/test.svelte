@@ -94,15 +94,19 @@ Last Update    : 18/04.2022
 
 		<footer id="footer" class="width flex">
 			<Counter on:call={timerOut} />
-			<button class="option right_shift" on:click={() => (sidebar = !sidebar)}>List</button>
-			<button class="option right_shift" on:click={() => current--} disabled={current == 0}>
+			<!-- svelte-ignore a11y-accesskey -->
+			<button class="option right_shift" accesskey="l" on:click={() => (sidebar = !sidebar)}>List</button>
+			<!-- svelte-ignore a11y-accesskey -->
+			<button class="option right_shift" accesskey="p" on:click={() => current--} disabled={current == 0}>
 				Previous
 			</button>
-			<p class="list right_shift"><b>{current + 1} out of 11</b></p>
-			<button class="option right_shift" on:click={() => current++} disabled={current == 10}>
+			<p class="list right_shift" ><b>{current + 1} out of 11</b></p>
+			<!-- svelte-ignore a11y-accesskey -->
+			<button class="option right_shift" accesskey="n" on:click={() => current++} disabled={current == 10}>
 				Next
 			</button>
-			<button class="option right_shift" on:click={endTest}>End Test</button>
+			<!-- svelte-ignore a11y-accesskey -->
+			<button class="option right_shift" accesskey="e" on:click={endTest}>End Test</button>
 		</footer>
 	{:else}
 		<Resultpage resultdata={user_data} />

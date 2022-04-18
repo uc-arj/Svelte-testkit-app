@@ -136,7 +136,8 @@ Last Update    : 18/04.2022
 			{/each}
 		</div>
 		<footer class="footer">
-			<button class="foot_option" on:click={restart}>RETAKE</button>
+			<!-- svelte-ignore a11y-accesskey -->
+			<button class="foot_option" accesskey="r" on:click={restart}>RETAKE</button>
 		</footer>
 	{:else if start_page == false}
 		<Startpage />

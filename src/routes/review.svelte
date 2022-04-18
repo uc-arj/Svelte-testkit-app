@@ -66,11 +66,15 @@ Last Update    : 18/04.2022
 		</div>
 
 		<footer id="footer">
-			<button class="panel" on:click={restart}>Restart</button>
-			<button class="panel" on:click={() => current++} disabled={current == 10}> Next </button>
+			<!-- svelte-ignore a11y-accesskey -->
+			<button class="panel" accesskey="s" on:click={restart}>Restart</button>
+			<!-- svelte-ignore a11y-accesskey -->
+			<button class="panel" accesskey="n" on:click={() => current++} disabled={current == 10}> Next </button>
 			<p class="list"><b>{current + 1} out of 11</b></p>
-			<button class="panel" on:click={() => current--} disabled={current == 0}> Previous </button>
-			<button class="panel" on:click={() => (result = !result)}>Result</button>
+			<!-- svelte-ignore a11y-accesskey -->
+			<button class="panel" accesskey="p" on:click={() => current--} disabled={current == 0}> Previous </button>
+			<!-- svelte-ignore a11y-accesskey -->
+			<button class="panel" accesskey="r" on:click={() => (result = !result)}>Result</button>
 		</footer>
 	{:else if start_page == false}
 		<Startpage />

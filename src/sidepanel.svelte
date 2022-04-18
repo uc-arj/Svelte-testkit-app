@@ -21,7 +21,8 @@ Last Update    : 18/04.2022
 
 <main>
 	<div id="mySidebar" class="sidebar">
-		<button class:openbtn={(side_open==true)} id="openbtn" on:click={() => (side_open = !side_open)}
+		<!-- svelte-ignore a11y-accesskey -->
+		<button class:openbtn={(side_open==true)} accesskey="s" id="openbtn" on:click={() => (side_open = !side_open)}
 			><img {src} alt="arrow" width="10px" height="10px" /> Sidebar</button>
 		<div class="questlist">
 			{#if side_open == true}
