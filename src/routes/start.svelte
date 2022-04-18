@@ -19,7 +19,8 @@ Last Update    : 18/04.2022
 
 {#if code == true}
 	<div class="butn">
-		<button on:click={start} class="start">Start Test</button>
+		<!-- svelte-ignore a11y-accesskey -->
+		<button accesskey="s" on:click={start} class="start">Start Test</button>
 	</div>
 {:else}
 	<Testpage />
