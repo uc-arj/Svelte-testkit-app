@@ -195,7 +195,6 @@ Last Update    : 18/04.2022
 		width: 65vw;
 		top: 0px;
 		margin-bottom: 5vh;
-		overflow: auto;
 	}
 	.top {
 		margin-left: 5vw;
