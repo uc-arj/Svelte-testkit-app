@@ -69,7 +69,6 @@ Last Update    : 18/04.2022
 		height: 70vh;
 		position: fixed;
 		padding: 20px 5px 5px 0px;
-		top: 30px;
 		left: 5px;
 		white-space: nowrap;
 		transition: ease-in-out;
