@@ -79,7 +79,7 @@ Last Update    : 18/04.2022
 		width: 13vw;
 		font-weight:bold;
 		border:dashed red;
-		border-width:3px 3px 3px 0px;
+		border-width:2px 2px 2px 0px;
 	}
 	.openbtn {
 		z-index: 1;
