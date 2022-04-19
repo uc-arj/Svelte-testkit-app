@@ -144,7 +144,6 @@ Last Update    : 18/04.2022
 		margin-top: 5px;
 		margin-left: 3px;
 		margin-right: 10px;
-		border-radius: 12px 12px 0px 0px;
 		float: right;
 	}
 	.panel:hover {

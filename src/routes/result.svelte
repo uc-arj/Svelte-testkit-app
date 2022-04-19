@@ -255,7 +255,6 @@ Last Update    : 18/04.2022
 		margin-top: 1vh;
 		margin-left: 1vw;
 		margin-right: 15px;
-		border-radius: 12px 12px 0px 0px;
 		float: right;
 	}
 	.foot_option:hover {
