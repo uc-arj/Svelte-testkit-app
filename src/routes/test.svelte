@@ -91,7 +91,6 @@ Last Update    : 18/04.2022
 				{/if}
 			</div>
 		</div>
-
 		<footer id="footer" class="width flex">
 			<Counter on:call={timerOut} />
 			<!-- svelte-ignore a11y-accesskey -->
@@ -178,7 +177,6 @@ Last Update    : 18/04.2022
 		position: fixed;
 		left: 0vw;
 		bottom: 0vh;
-		width: 100vw;
 		height: 10vh;
 		background-color: rgba(222, 204, 208, 0.653);
 		border-top: 1px solid rgba(163, 159, 159, 0.671);
