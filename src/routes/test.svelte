@@ -81,12 +81,12 @@ Last Update    : 18/04.2022
 			<div class="modal-content">
 				{#if show_end == true}
 					<span class="close" on:click={() => (show_end = !show_end)}>&times;</span>
-					<p>Do you Want to End Test</p>
+					<p>Do you want to End the Test</p>
 
 					<button class="cancel_btn" on:click={() => (show_end = !show_end)}> Cancel</button>
 					<button class="Ok_btn" on:click={() => (test_end = false)}>OK</button>
 				{:else}
-					<p class="time-endcode">Timeup your test is end :Check out your Result</p>
+					<p class="time-endcode">Timeup your test is end :<br>Check out your Result</p>
 					<button class="Ok_btn" on:click={() => (test_end = false)}>OK</button>
 				{/if}
 			</div>
@@ -127,7 +127,7 @@ Last Update    : 18/04.2022
 	}
 	.modal-content {
 		background-color: #fefefe;
-		margin: 2% auto; /* 15% from the top and centered */
+		margin: 15% auto; /* 15% from the top and centered */
 		padding: 20px;
 		font-size: 2vw;
 		font-weight: bold;
@@ -164,7 +164,7 @@ Last Update    : 18/04.2022
 		background-color: rgb(0, 123, 255);
 	}
 	.time-endcode {
-		font-size: 14px;
+		font-size: 25px;
 	}
 
 	* {

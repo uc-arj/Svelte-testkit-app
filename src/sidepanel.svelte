@@ -22,8 +22,6 @@ Last Update    : 18/04.2022
 <main>
 	<div id="mySidebar" class="sidebar">
 		<!-- svelte-ignore a11y-accesskey -->
-		<!-- <button class:openbtn={(side_open==true)} accesskey="s" id="openbtn" on:click={() => (side_open = !side_open)}
-			><img {src} alt="arrow" width="10px" height="10px" /> Sidebar</button> -->
 		<div class="questlist" style="--display:{side_open? 'inset' : 'none'}">
 			{#if side_open == true}
 				<div class="question-attempt">
@@ -32,7 +30,7 @@ Last Update    : 18/04.2022
 				</div>
 				{#each user as i, j}
 					<p class="question">
-						<li on:click={() => forward('message', j)}>{JSON.parse(i.content_text).question}</li>
+						<li on:click={() => forward('message', j)}><b>{JSON.parse(i.content_text).question}</b></li>
 					</p>
 				{/each}<br />
 			{/if}
@@ -45,15 +43,17 @@ Last Update    : 18/04.2022
 		display: flex;
 		justify-content: end;
 		align-items: flex-end;
-		float: left;
+
 	}
 	li {
 		list-style-type: square;
 		overflow: hidden;
+		font-size:2vh;
+		margin-bottom: 3vh;
 		text-overflow: ellipsis;
 	}
 	.question-attempt{
-		width:13vw;
+		width:18vw;
 	}
 	.count-block{
 		border:2px inset red;
@@ -61,30 +61,30 @@ Last Update    : 18/04.2022
 		text-overflow: ellipsis;
 		font-size:3vh;
 		text-align: center;
-		margin-right: 2px;
+		margin-right: 2px;	
+		margin-bottom: 4vh;
 	}
 	.questlist{
 		border-style: var(--display);
   		border-width: 2px 2px 2px 0px;
 		border-color:red;
 		margin-right: 4px;
+		height:83vh;
 	}
 	
 	.sidebar {
+		margin-top:20vh;
 		z-index: 1;
-		width:14vw;
-		height: 64vh;
+		width:19vw;
+		height: 66vh;
 		position: fixed;
-		padding: 20px 5px 5px 0px;
 		left: 5px;
 		white-space: nowrap;
-		transition: 0.2s ease-in-out;
 	}
 
 	.question {
 		cursor: pointer;
-		width: 13vw;
-		font-weight:bold;
+		width: 17vw;
 	}
 	
 </style>
